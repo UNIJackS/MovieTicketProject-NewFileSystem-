@@ -34,7 +34,6 @@ void snack_extractor(int person_num) {
 	}
 	cout << endl << "Please enter the name of the snack then the quntity of said snack desired. With a maximum of 9" << endl;
 	cout << "once you have finished your selection of snacks please enter 3 x's" << endl;
-
 	
 	while (true) {
 	top:
