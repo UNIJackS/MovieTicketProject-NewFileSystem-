@@ -34,49 +34,58 @@ void snack_extractor(int person_num) {
 	}
 	cout << endl << "Please enter the name of the snack then the quntity of said snack desired. With a maximum of 9" << endl;
 	cout << "once you have finished your selection of snacks please enter 3 x's" << endl;
-	bool loop = true;
-	while (loop == true) {
-		while (true) {
-		top:
-			cout << "  :";
-			getline(cin, string_to_extract);
-			for (int f = 0; f < size(string_to_extract); f +=1) {
-				string_to_extract[f] = tolower(string_to_extract[f]);
-			}
-			if (regex_search(string_to_extract, regex_results, range0_9)) {
-				str_num_of_snacks = regex_results[0];
-				if (string_to_extract[regex_results.position() + 1] == '.' && isdigit(string_to_extract[regex_results.position() + 2])) {
-					goto error;
-				}
-				string test1 = string_to_extract;
-				test1[regex_results.position()] = 'a';
-				if (regex_search(test1, regex_results, range0_9)) {
-					goto error;
-				}
-				snack_quantity = stoi(str_num_of_snacks);
-			}
-			else
-			{
-				snack_quantity = 1;
-			}
 
-			for (int i = 0; i < sizeof(snacks) / sizeof(snacks[0]); i += 1) {
-				if (string_to_extract.find(snacks[i]) != std::string::npos) {
-					snack_type = i;
-					snack_info[person_num][snack_type] = snack_quantity;
-					goto top;
-				}
-			}
-			if (string_to_extract.find("xxx") != std::string::npos) {
-				loop = false;
-				break;
-			}
-		error:
-			cout << "please enter a snacks name and the number of snacks wanted";
+	
+	while (true) {
+	top:
+		cout << "  :";
+		getline(cin, string_to_extract);
+		// makes the users input all lower case
+		for (int f = 0; f < size(string_to_extract); f +=1) {
+			string_to_extract[f] = tolower(string_to_extract[f]);
 		}
-
+		// searches the users input for the presense and position of the first number
+		if (regex_search(string_to_extract, regex_results, range0_9)) {
+			// Checks if the char 1 to the right of the first number in the users input is a "." and weather the next char is a number
+			if (string_to_extract[regex_results.position() + 1] == '.' && isdigit(string_to_extract[regex_results.position() + 2])) {
+				goto error;
+			}
+			string str_with_no_num = string_to_extract;
+			// converts the number detected with the first regex to an "a"
+			str_with_no_num[regex_results.position()] = 'a';
+			// searches this new str with out the first number to see if it still contains a number 
+			if (regex_search(str_with_no_num, range0_9)) {
+				// if there is a second number then it errors out
+				goto error;
+			}
+			// makes the snack quanity to the found number 
+			snack_quantity = stoi(regex_results[0]);
+		}
+		// if no number is found in the users input 
+		else
+		{
+			// then set the quntity to 1
+			snack_quantity = 1;
+		}
+		// for the number of items/snacks in the snacks list 
+		for (int i = 0; i < sizeof(snacks) / sizeof(snacks[0]); i += 1) {
+			// .find returns the pos of a sub string if it is in a string and returns npos (maximum size of a string) if it is not in the main string
+			// so if the sub string is detected then it will not be npos
+			if (string_to_extract.find(snacks[i]) != std::string::npos) {
+				// sets snack type to i which will be the snacks pos in the snacks list 
+				snack_type = i;
+				// sets the snack quanityty onto the snack_info list
+				snack_info[person_num][snack_type] = snack_quantity;
+				goto top;
+			}
+		}
+		// if "xxx" is found it exits the while loop c
+		if (string_to_extract.find("xxx") != std::string::npos) {
+			break;
+		}
+	error:
+		cout << "please enter a snacks name and the number of snacks wanted";
 	}
-
 }
 
 
