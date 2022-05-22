@@ -83,7 +83,7 @@ void snack_extractor(int person_num) {
 			break;
 		}
 	error:
-		cout << "please enter a snacks name and the number of snacks wanted";
+		cout << "please enter a snacks name and the number of snacks wanted\n\n";
 	}
 }
 
