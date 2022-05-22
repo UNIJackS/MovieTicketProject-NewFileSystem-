@@ -12,7 +12,7 @@ float credit_card_surcharge = 5; //in percent
 
 int snack_info[max_tickets][sizeof(snacks) / sizeof(snacks[0])];
 
-int max_seats = 3;
+
 
 void csv_file_writter(int ID, string name, int age, float ticket_price, float snack_cost, bool cash_or_card, float ticket_profit) {
 	if (ID == 0) {
