@@ -21,7 +21,7 @@ void snack_extractor(string string_to_extract, int& snack_quantity, int& snack_t
 
 	for (int i = 0; i < sizeof(snacks) / sizeof(snacks[0]); i += 1) {
 		if (string_to_extract.find(snacks[i]) != std::string::npos) {
-			std::cout << "found!" << '\n';
+			cout << "snack detected :" << snacks[i] << '\n';
 			snack_type = i;
 		}
 	}
