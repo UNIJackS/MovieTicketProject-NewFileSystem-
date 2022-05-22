@@ -11,7 +11,7 @@ float credit_card_surcharge = 5; //in percent
 int const max_tickets = 3;
 
 // ====== Snack Data ======
-string snacks[] = { "popcorn","m & m's","pita chips","orange juice","water" };
+string snacks[] = { "popcorn","m & m's","pita chips","orange juice","water"};
 
 float snacks_price[] = { 2.5,3.0,4.5,3.25,2.0 };
 
@@ -33,6 +33,7 @@ float ticket_prices[] = { 7.5,10.5,6.5 };
 //... Eg to add a $15 profit to the previous example it would look like this...
 //...float ticket_cost_profits[] = { 2.5,5.5,15.0,1.5 };
 float ticket_profits[] = { 2.5,5.5,1.5 };
+
 
 
 int snack_info[max_tickets][sizeof(snacks) / sizeof(snacks[0])];
