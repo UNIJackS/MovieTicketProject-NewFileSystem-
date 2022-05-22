@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -121,7 +120,9 @@ int int_checker(string question, int min) {
 	}
 }
 
+// This function takes a persons num and assigns what snacks they want and how many to the snaack_info array
 void snack_extractor(int person_num) {
+	//  This is the range of numbers it will check for in the 
 	regex range0_9("[0-9]");
 	smatch regex_results;
 	smatch regext_match_results;
@@ -130,61 +131,73 @@ void snack_extractor(int person_num) {
 	int snack_type;
 	int snack_quantity;
 
-	cout << "What snacks would you like ? if you do not want any snacks or have finished your selecton enter 3 x's\n please enter a number before or after the snack's name to order multiple" << endl;
+	cout << "Which snacks would you like to pre order ?" << endl;
 	cout << "your options are ";
+	// This for loop prints the snack options offered 
 	for (int r = 0; r < sizeof(snacks) / sizeof(snacks[0]); r += 1) {
 		cout << snacks[r];
+		// This if statement prints a comma between each snack unless it is the last or second to last snack option in the snacks array
 		if (r != sizeof(snacks) / sizeof(snacks[0]) - 1 && r != sizeof(snacks) / sizeof(snacks[0]) - 2) {
 			cout << ", ";
 		}
+		// This if statment prints an and between the second to last snack and the last snack in the snacks array
 		else if (r == sizeof(snacks) / sizeof(snacks[0]) - 2) {
 			cout << " and ";
 		}
 	}
-	bool loop = true;
-	while (loop == true) {
-		while (true) {
-		top:
-			cout << "\n  :";
-			getline(cin, string_to_extract);
-			for_each(string_to_extract.begin(), string_to_extract.end(), [](char& c) {
-				c = ::tolower(c);
-				});
+	cout << endl << "Please enter the name of the snack then the quntity of said snack desired. With a maximum of 9" << endl;
+	cout << "once you have finished your selection of snacks please enter 3 x's" << endl;
 
-			if (regex_search(string_to_extract, regex_results, range0_9)) {
-				str_num_of_snacks = regex_results[0];
-				if (string_to_extract[regex_results.position() + 1] == '.' && isdigit(string_to_extract[regex_results.position() + 2])) {
-					goto error;
-				}
-				string test1 = string_to_extract;
-				test1[regex_results.position()] = 'a';
-				if (regex_search(test1, regex_results, range0_9)) {
-					goto error;
-				}
-				snack_quantity = stoi(str_num_of_snacks);
-			}
-			else
-			{
-				snack_quantity = 1;
-			}
-
-			for (int i = 0; i < sizeof(snacks) / sizeof(snacks[0]); i += 1) {
-				if (string_to_extract.find(snacks[i]) != std::string::npos) {
-					snack_type = i;
-					snack_info[person_num][snack_type] = snack_quantity;
-					goto top;
-				}
-			}
-			if (string_to_extract.find("xxx") != std::string::npos) {
-				loop = false;
-				break;
-			}
-		error:
-			cout << "please enter a snacks name and the number of snacks wanted";
+	while (true) {
+	top:
+		cout << "  :";
+		getline(cin, string_to_extract);
+		// makes the users input all lower case
+		for (int f = 0; f < size(string_to_extract); f += 1) {
+			string_to_extract[f] = tolower(string_to_extract[f]);
 		}
-
+		// searches the users input for the presense and position of the first number
+		if (regex_search(string_to_extract, regex_results, range0_9)) {
+			// Checks if the char 1 to the right of the first number in the users input is a "." and weather the next char is a number
+			if (string_to_extract[regex_results.position() + 1] == '.' && isdigit(string_to_extract[regex_results.position() + 2])) {
+				goto error;
+			}
+			string str_with_no_num = string_to_extract;
+			// converts the number detected with the first regex to an "a"
+			str_with_no_num[regex_results.position()] = 'a';
+			// searches this new str with out the first number to see if it still contains a number 
+			if (regex_search(str_with_no_num, range0_9)) {
+				// if there is a second number then it errors out
+				goto error;
+			}
+			// makes the snack quanity to the found number 
+			snack_quantity = stoi(regex_results[0]);
+		}
+		// if no number is found in the users input 
+		else
+		{
+			// then set the quntity to 1
+			snack_quantity = 1;
+		}
+		// for the number of items/snacks in the snacks list 
+		for (int i = 0; i < sizeof(snacks) / sizeof(snacks[0]); i += 1) {
+			// .find returns the pos of a sub string if it is in a string and returns npos (maximum size of a string) if it is not in the main string
+			// so if the sub string is detected then it will not be npos
+			if (string_to_extract.find(snacks[i]) != std::string::npos) {
+				// sets snack type to i which will be the snacks pos in the snacks list 
+				snack_type = i;
+				// sets the snack quanityty onto the snack_info list
+				snack_info[person_num][snack_type] = snack_quantity;
+				goto top;
+			}
+		}
+		// if "xxx" is found it exits the while loop c
+		if (string_to_extract.find("xxx") != std::string::npos) {
+			break;
+		}
+	error:
+		cout << "please enter a snacks name and the number of snacks wanted\n\n";
 	}
-
 }
 
 //A function that takes a question and returns a bool of weather they selcted true or false 
@@ -212,9 +225,12 @@ bool yes_or_no(string question, string value1, string value2, string error_messa
 }
 
 
+//This function takes the age of the customet and then checks what pricing range they fit into. It then returns the profit and price of their ticket
 void ticket_cost_calculator(int age, float& ticket_price, float& ticket_profit) {
+	//this loop runs for the number of items in the ticket_prices list
 	for (int f = 0; f < sizeof(ticket_prices) / sizeof(ticket_prices[0]); f += 1) {
 		if (age >= ticket_cost_ranges[f][0] and age <= ticket_cost_ranges[f][1]) {
+			//sets the ticked_price pointer as ticked_prices and ticket_profit pointer as ticket_profit
 			ticket_price = ticket_prices[f];
 			ticket_profit = ticket_profits[f];
 		}
@@ -223,54 +239,94 @@ void ticket_cost_calculator(int age, float& ticket_price, float& ticket_profit) 
 
 // This function takes the users data then writes it to a csv file called results attendee_details.csv
 void csv_file_writter(int ID, string name, int age, float ticket_price, float snack_cost, bool cash_or_card, float ticket_profit, bool last_ticket, float grand_total_profit) {
+	cout << "csv file writter triggered" << endl;
+	// This if statement ouputs the titles for the collums if this is the first seat sold (ID = 0)
 	if (ID == 0) {
 		attendee_details << "Seat Num , Name , Age,Ticket price,";
-		for (int p = 0;p < sizeof(snacks) / sizeof(snacks[0]); p += 1) {
+		// This loop outputs the names of the snacks for the number of snacks in the list.
+		for (int p = 0; p < sizeof(snacks) / sizeof(snacks[0]); p += 1) {
 			attendee_details << snacks[p] << ",";
 		}
 		attendee_details << "Snack Cost,Payment Method,Surcharge,Total Cost,Seat Profit,Snack Profit,Total Profit " << endl;
 	}
-
+	// Out puts the most basic info to the file
 	attendee_details << ID + 1 << "," << name << "," << age << "," << ticket_price << ",";
-	for (int t = 0;t < sizeof(snacks) / sizeof(snacks[0]); t += 1) {
+	for (int t = 0; t < sizeof(snacks) / sizeof(snacks[0]); t += 1) {
 		attendee_details << snack_info[ID][t] << ",";
 	}
+	// calulates the total price to be charged by adding the ticket price and the snack cost
 	float total_price = ticket_price + snack_cost;
+	// adds the credit card surcharge if they selected card as their payment method
 	if (cash_or_card == true) {
 		total_price += (total_price / 100) * credit_card_surcharge;
 	}
 	attendee_details << snack_cost << ",";
+	// out puts cash or card to the file depending on what they selected
 	if (cash_or_card) {
 		attendee_details << "cash ,";
 	}
+	else {
+		attendee_details << "card ,";
+	}
 	float snack_profit = 0;
-	for (int c = 0;c < sizeof(snacks) / sizeof(snacks[0]); c += 1) {
+	// This loop adds up the cost of all the snacks they have ordered
+	for (int c = 0; c < sizeof(snacks) / sizeof(snacks[0]); c += 1) {
 		snack_profit += snack_info[ID][c] * snacks_profit[c];
 	};
 	float total_profit = ticket_profit + snack_profit;
 	attendee_details << (total_price / 100) * credit_card_surcharge << "," << total_price << "," << ticket_price << ",," << ticket_profit << "," << snack_profit << ",";
 	attendee_details << total_profit << endl;
 
+	// This if statment outputs the summary statsitcs ot the file if this is the last ticket to be sold
 	if (last_ticket) {
-		attendee_details << endl << " Totals" << endl << ID + 1 << "," << "," << ",";
-		for (int c = 0;c < sizeof(snacks) / sizeof(snacks[0]); c += 1) {
+		attendee_details << endl << " Totals" << endl << ID + 1 << ",,,";
+		// This for loop prints the total number of snacks that every one has ordered
+		for (int c = 0; c < sizeof(snacks) / sizeof(snacks[0]); c += 1) {
 			attendee_details << total_snacks[c] << ",";
 			grand_total_profit += total_snacks[c] * snacks_profit[c];
 		};
-
-		attendee_details << grand_total_profit;
+		// THis for loop prints "," for the number of snacks. It does this so that the program can scale with added or subtracted snacks.
+		for (int v = 0; v < sizeof(snacks) / sizeof(snacks[0]); v += 1) {
+			attendee_details << ",";
+		}
+		attendee_details << ",,Total profit:," << total_profit << endl << ",,Total seats :," << ID + 1;
+		// Closese the file
 		attendee_details.close();
+	}
+}
+
+//This function validates the data that can be changed by someone with little to no c++ knoledge ...
+//...It does this by comparing the size of the arrays relating to snacks and ticket prices and by ...
+//...making sure the credit card surcharge is greater than or equal to 0
+void Program_Validator() {
+	bool valid = true;
+	// Compares the size of the arrays to do with ticket's and their price,profit and age ranges
+	if (sizeof(ticket_cost_ranges) / sizeof(ticket_cost_ranges[0]) != sizeof(ticket_prices) / sizeof(ticket_prices[0]) || sizeof(ticket_prices) / sizeof(ticket_prices[0]) != sizeof(ticket_profits) / sizeof(ticket_profits[0])) {
+		cout << "The size of ticket_cost_ranges,ticket_prices and ticket_profits lists must be the same" << endl;
+		valid = false;
+	}
+	// Compares the size of the arrays to do with snack's and their price, profit and selection
+	if (sizeof(snacks) / sizeof(snacks[0]) != sizeof(snacks_price) / sizeof(snacks_price[0]) || sizeof(snacks) / sizeof(snacks[0]) != sizeof(snacks_profit) / sizeof(snacks_profit[0])) {
+		cout << "The size of snacks,snacks_price and snacks_profit lists must be the same" << endl;
+		valid = false;
+	}
+	// Checks if the credit card surcharge is above or equal to 0
+	if (credit_card_surcharge <= 0) {
+		cout << "The credit_card_surcharge varable must be greater than or equal to 0 " << endl;
+		valid = false;
+	}
+	// Exits the program if any of the previous if statements where true
+	if (valid == false) {
+		exit;
 	}
 }
 
 
 
 
-
-
 int main()
 {
-
+	Program_Validator();
 	float grand_total_profit = 0;
 	int i = 0;
 	while (i < max_tickets) {
@@ -293,16 +349,19 @@ int main()
 			total_snacks[k] += snack_info[i][k];
 		}
 
-		bool card = yes_or_no("Which payment method would you like to use; cash or card ?", "cash", "card", "plese enter your payment method eyther cash or card");
+		bool card = yes_or_no("Which payment method would you like to use cash or card ?", "cash", "card", "plese enter your payment method eyther cash or card");
+
+		
 
 
-		if (yes_or_no("would you like to sell another seat", "no", "yes", "Pleease enter yes or no") == false) {
+		if (yes_or_no("would you like to sell another seat", "yes", "no", "Pleease enter yes or no") == true) {
 			csv_file_writter(i, name, age, ticket_price, snack_cost, card, ticket_profit, true, grand_total_profit);
-			exit;
+			goto stop;
 		}
 		else {
 			csv_file_writter(i, name, age, ticket_price, snack_cost, card, ticket_profit, false, grand_total_profit);
 		}
 		i += 1;
 	}
+stop:;
 }

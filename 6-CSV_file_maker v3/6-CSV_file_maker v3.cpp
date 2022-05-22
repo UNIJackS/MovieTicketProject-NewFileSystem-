@@ -14,7 +14,6 @@ int snack_info[max_tickets][sizeof(snacks) / sizeof(snacks[0])];
 
 
 
-// This function takes the users data then writes it to a csv file called results attendee_details.csv
 void csv_file_writter(int ID, string name, int age, float ticket_price, float snack_cost, bool cash_or_card, float ticket_profit) {
 	if (ID == 0) {
 		attendee_details << "Seat Num , Name , Age,Ticket price,";
@@ -46,3 +45,6 @@ void csv_file_writter(int ID, string name, int age, float ticket_price, float sn
 
 
 }
+
+
+// Because of how much stuff is required for this to be tested i simply coppy pasted it into the main program and tested it there rather than make a main loop 
