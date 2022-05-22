@@ -5,7 +5,7 @@
 
 using namespace::std;
 // This fucntion takes a question then asks it and returns a valid stirng
-string string_checker(string question) {
+string string_checker(string question,string error_message) {
 	// declares local varables that will be used
 	string user_input;
 	int test_int;
@@ -32,11 +32,13 @@ string string_checker(string question) {
 			}
 			catch (const std::exception&)
 			{
-				return user_input;
+				if (user_input != "") {
+					return user_input;
+				}
 			}
 		}
 		// the error message for if it does convert to a string or a float 
-		cout << "plese enter a string" << endl << "  :";
+		cout << error_message << endl << "  :";
 	}
 }
 
@@ -45,7 +47,7 @@ string string_checker(string question) {
 
 int main()
 {
-	string name = string_checker("enter name");
+	string name = string_checker("Please enter your name","Please enter your name. This name can not be blank or be just numbers");
 	cout << endl << "name entered :" << name << endl;
 
 }
