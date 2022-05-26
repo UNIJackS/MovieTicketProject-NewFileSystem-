@@ -28,7 +28,7 @@ string string_checker(string question,string error_message) {
 			try
 			{
 				// this trys and converts the users input into a float
-				test_float = stoi(user_input);
+				test_float = stof(user_input);
 			}
 			catch (const std::exception&)
 			{
