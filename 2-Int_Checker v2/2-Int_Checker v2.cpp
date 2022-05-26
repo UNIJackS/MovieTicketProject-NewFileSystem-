@@ -6,7 +6,7 @@
 using namespace::std;
 
 //This function takes a question and a minimum number and returns an int
-int int_checker(string question, int min) {
+int int_checker(string question, int min, int max) {
 	//This asks the question
 	cout << question << endl << "  :";
 	//Initilizes valid_answer as true which will only turn to false when a valid input is entered
@@ -27,7 +27,7 @@ int int_checker(string question, int min) {
 				if (r == i) {
 					//checks weather the users input is above the minimum
 					int k = stoi(user_input);
-					if (k > min) {
+					if (k > min && k < max) {
 						return stoi(user_input);
 					}
 
@@ -35,7 +35,7 @@ int int_checker(string question, int min) {
 
 			}
 			//Error message outputted if the user_input is bellow the minimum
-			cout << "Please enter a whole number that is above " << min << "\n  :";
+			cout << "Please enter a whole number that is above " << min << " and bellow " << max << "\n  :";
 		}
 		catch (const std::exception&)
 		{
@@ -49,7 +49,7 @@ int int_checker(string question, int min) {
 int main()
 {
 	int age;
-	age = int_checker("please enter your age", 12);
+	age = int_checker("please enter your age", 12,100);
 	cout << "valid age :" << age << endl;
 
 }
