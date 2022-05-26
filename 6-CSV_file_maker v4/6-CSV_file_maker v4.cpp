@@ -49,7 +49,7 @@ void csv_file_writter(int ID, string name, int age, float ticket_price, float sn
 		for (int p = 0;p < sizeof(snacks) / sizeof(snacks[0]); p += 1) {
 			attendee_details << snacks[p] << ",";
 		}
-		attendee_details << "Snack Cost,Payment Method,Surcharge,Total Cost,Seat Profit,Snack Profit,Total Profit " << endl;
+		attendee_details << "Snack Cost,Payment Method,Surcharge,Total Cost,,Seat Profit,Snack Profit,Total Profit " << endl;
 	}
 	// Out puts the most basic info to the file
 	attendee_details << ID + 1 << "," << name << "," << age << "," << ticket_price << ",";
@@ -76,7 +76,7 @@ void csv_file_writter(int ID, string name, int age, float ticket_price, float sn
 		snack_profit += snack_info[ID][c] * snacks_profit[c];
 	};
 	float total_profit = ticket_profit + snack_profit;
-	attendee_details << (total_price / 100) * credit_card_surcharge << "," << total_price << "," << ticket_price << ",," << ticket_profit << "," << snack_profit << ",";
+	attendee_details << (total_price / 100) * credit_card_surcharge << "," << total_price << "," << ",," << ticket_profit << "," << snack_profit << ",";
 	attendee_details << total_profit << endl;
 
 	// This if statment outputs the summary statsitcs ot the file if this is the last ticket to be sold
