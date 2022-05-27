@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0-Main program", "Movie Ticket Project (new file system)\Movie Ticket Project (new file system).vcxproj", "{6488E080-EF8A-4A05-B806-592E862ADC00}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0-Main_Pogram v1", "Movie Ticket Project (new file system)\Movie Ticket Project (new file system).vcxproj", "{6488E080-EF8A-4A05-B806-592E862ADC00}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-String_Checker v1", "1-String_Checker v1\1-String_Checker v1.vcxproj", "{D090CB44-0ED6-4643-A625-B05F314C8E9B}"
 EndProject
@@ -42,6 +42,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7-Program_Validator v2", "7-Program_Validator v2\7-Program_Validator v2.vcxproj", "{B3D237BC-E3B3-4D68-B59E-659C39D80F62}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-Cash_or_Card v3", "4-Cash_or_Card v3\4-Cash_or_Card v3.vcxproj", "{45FA0675-38E1-42DC-BD18-4DA8EAE76941}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0-Main_Pogram v2", "0-Main_Pogram v2\0-Main_Pogram v2.vcxproj", "{12A61F19-A303-4C2D-A35A-4429A1ADCB56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -211,6 +213,14 @@ Global
 		{45FA0675-38E1-42DC-BD18-4DA8EAE76941}.Release|x64.Build.0 = Release|x64
 		{45FA0675-38E1-42DC-BD18-4DA8EAE76941}.Release|x86.ActiveCfg = Release|Win32
 		{45FA0675-38E1-42DC-BD18-4DA8EAE76941}.Release|x86.Build.0 = Release|Win32
+		{12A61F19-A303-4C2D-A35A-4429A1ADCB56}.Debug|x64.ActiveCfg = Debug|x64
+		{12A61F19-A303-4C2D-A35A-4429A1ADCB56}.Debug|x64.Build.0 = Debug|x64
+		{12A61F19-A303-4C2D-A35A-4429A1ADCB56}.Debug|x86.ActiveCfg = Debug|Win32
+		{12A61F19-A303-4C2D-A35A-4429A1ADCB56}.Debug|x86.Build.0 = Debug|Win32
+		{12A61F19-A303-4C2D-A35A-4429A1ADCB56}.Release|x64.ActiveCfg = Release|x64
+		{12A61F19-A303-4C2D-A35A-4429A1ADCB56}.Release|x64.Build.0 = Release|x64
+		{12A61F19-A303-4C2D-A35A-4429A1ADCB56}.Release|x86.ActiveCfg = Release|Win32
+		{12A61F19-A303-4C2D-A35A-4429A1ADCB56}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
