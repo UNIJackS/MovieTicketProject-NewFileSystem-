@@ -41,19 +41,19 @@ int snack_info[max_tickets][sizeof(snacks) / sizeof(snacks[0])];
 
 
 // This function takes the users data then writes it to a csv file called results attendee_details.csv
-void csv_file_writter(int ID, string name, int age, float ticket_price, float snack_cost, bool cash_or_card, float ticket_profit, bool last_ticket, float grand_total_profit) {
+void csv_file_writter(int ID, string name, int age, float ticket_price, float snack_cost, bool cash_or_card, float ticket_profit, bool last_ticket) {
 	// This if statement ouputs the titles for the collums if this is the first seat sold (ID = 0)
 	if (ID == 0) {
 		attendee_details << "Seat Num , Name , Age,Ticket price,";
 		// This loop outputs the names of the snacks for the number of snacks in the list.
-		for (int p = 0;p < sizeof(snacks) / sizeof(snacks[0]); p += 1) {
+		for (int p = 0; p < sizeof(snacks) / sizeof(snacks[0]); p += 1) {
 			attendee_details << snacks[p] << ",";
 		}
 		attendee_details << "Snack Cost,Payment Method,Surcharge,Total Cost,,Seat Profit,Snack Profit,Total Profit " << endl;
 	}
 	// Out puts the most basic info to the file
 	attendee_details << ID + 1 << "," << name << "," << age << "," << ticket_price << ",";
-	for (int t = 0;t < sizeof(snacks) / sizeof(snacks[0]); t += 1) {
+	for (int t = 0; t < sizeof(snacks) / sizeof(snacks[0]); t += 1) {
 		attendee_details << snack_info[ID][t] << ",";
 	}
 	// calulates the total price to be charged by adding the ticket price and the snack cost
@@ -72,23 +72,23 @@ void csv_file_writter(int ID, string name, int age, float ticket_price, float sn
 	}
 	float snack_profit = 0;
 	// This loop adds up the cost of all the snacks they have ordered
-	for (int c = 0;c < sizeof(snacks) / sizeof(snacks[0]); c += 1) {
+	for (int c = 0; c < sizeof(snacks) / sizeof(snacks[0]); c += 1) {
 		snack_profit += snack_info[ID][c] * snacks_profit[c];
 	};
 	float total_profit = ticket_profit + snack_profit;
-	attendee_details << (total_price / 100) * credit_card_surcharge << "," << total_price << "," << ",," << ticket_profit << "," << snack_profit << ",";
+	attendee_details << (total_price / 100) * credit_card_surcharge << "," << total_price << ",," << ticket_profit << "," << snack_profit << ",";
 	attendee_details << total_profit << endl;
-
+	grand_total_profit += ticket_profit;
 	// This if statment outputs the summary statsitcs ot the file if this is the last ticket to be sold
 	if (last_ticket) {
 		attendee_details << endl << " Totals" << endl << ID + 1 << ",,,";
 		// This for loop prints the total number of snacks that every one has ordered
-		for (int c = 0;c < sizeof(snacks) / sizeof(snacks[0]); c += 1) {
+		for (int c = 0; c < sizeof(snacks) / sizeof(snacks[0]); c += 1) {
 			attendee_details << total_snacks[c] << ",";
 			grand_total_profit += total_snacks[c] * snacks_profit[c];
 		};
 		// THis for loop prints "," for the number of snacks. It does this so that the program can scale with added or subtracted snacks.
-		for (int v = 0;v < sizeof(snacks) / sizeof(snacks[0]); v += 1) {
+		for (int v = 0; v < sizeof(snacks) / sizeof(snacks[0]); v += 1) {
 			attendee_details << ",";
 		}
 		attendee_details << ",,Total profit:," << total_profit << endl << ",,Total seats :," << ID + 1;
