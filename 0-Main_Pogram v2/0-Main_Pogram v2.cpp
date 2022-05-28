@@ -6,13 +6,29 @@
 
 using namespace::std;
 
-int const max_tickets = 3;
+
+int const max_tickets = 3; // Maximum number of tickets
 
 // ====== Snack Data ======
+//To remove a snack option simply remove it from the snacks list along with its ...
+//... corasponding price and profit margin on the snacks_profit and snacks_price...
+//... lists. Eg to remove popcorn the lists would look like...
+// string snacks[] = { "m & m's","pita chips","orange juice","water" };
+// float snacks_price[] = { 3.0,4.5,3.25,2.0 };
+// float snacks_profit[] = { 0.6,0.9,0.65,0.4 };
+
+//To add a snack option simply add its name to the snacks list, inclosed in quotaions...
+//... and with a comma seperating it from the prevous options. Eg adding a new snack called...
+//... ice block. string snacks[] = { "popcorn","m & m's","pita chips","orange juice","water","ice block" };...
+//... The new snacks name,price and profit margin must all be in the same order for the program to function
 string snacks[] = { "popcorn","m & m's","pita chips","orange juice","water" };
-
+//To add a new price for your new snack option simply add its price to the snacks_price list...
+//... and with a comma seperating it from the prevous options. Eg if the ice block will cost 3 dollars...
+//... float snacks_price[] = { 2.5,3.0,4.5,3.25,2.0,3.0 }; 
 float snacks_price[] = { 2.5,3.0,4.5,3.25,2.0 };
-
+//To add a new profit margin for your new snack option simply add its profit margin to the snacks_profit list...
+//... and with a comma seperating it from the prevous options. Eg if the ice block will have a profit margin of 1 dollar...
+//... float snacks_profit[] = { 0.5,0.6,0.9,0.65,0.4,1.0 };
 float snacks_profit[] = { 0.5,0.6,0.9,0.65,0.4 };
 
 // ====== Ticket Data ======
@@ -21,11 +37,13 @@ float snacks_profit[] = { 0.5,0.6,0.9,0.65,0.4 };
 //... range from 55-64 it would look like this ...
 //... int ticket_cost_ranges[4][2] = { {0,16},{17,54},{55,64},{65,100} };
 int ticket_cost_ranges[3][2] = { {0,16},{17,64},{65,100} };
+
 //To add a new price for the new range you must add a new price to the ticket_cost_prices...
 //... array and it must be in the same order as the ticket_cost_ranges...
 //... Eg to add a $20 price to the previous example it would look like this...
 //...float ticket_cost_prices[] = { 7.5,10.5,20.0,6.5 };
 float ticket_prices[] = { 7.5,10.5,6.5 };
+
 //To add a new profit for the new range you must add a new number to the ticket_cost_profits...
 //... array and it must be in the same order as the ticket_cost_ranges...
 //... Eg to add a $15 profit to the previous example it would look like this...
@@ -34,9 +52,9 @@ float ticket_profits[] = { 2.5,5.5,1.5 };
 
 float credit_card_surcharge = 5; //in percent 
 
-int min_age = 12;
+int min_age = 12; //Minimum age that will be accpeted
 
-int max_age = 100;
+int max_age = 100; //Maximum age that will be accepted
 
 
 float grand_total_profit = 0;
